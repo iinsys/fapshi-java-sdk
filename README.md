@@ -14,13 +14,17 @@ Java SDK for integrating with the [Fapshi Payment API](https://docs.fapshi.com/e
 
 ## Installation
 
-Add the SDK to your Maven project:
+Add the following to your Maven `pom.xml` to use the latest release from JitPack:
 
 ```xml
+<repository>
+  <id>jitpack.io</id>
+  <url>https://jitpack.io</url>
+</repository>
 <dependency>
-    <groupId>com.fapshi</groupId>
-    <artifactId>fapshi-java-sdk</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+  <groupId>com.github.iinsys</groupId>
+  <artifactId>fapshi-java-sdk</artifactId>
+  <version>v1.0.0</version>
 </dependency>
 ```
 

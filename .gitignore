@@ -6,6 +6,8 @@
 /.project
 /.settings/
 /.idea/
+.vscode/
+.idea/
 *.iml
 *.ipr
 *.iws
@@ -31,4 +33,4 @@ Thumbs.db
 /test-output/
 
 # Generated docs
-/docs/images/*.png 
+# /docs/images/*.png 

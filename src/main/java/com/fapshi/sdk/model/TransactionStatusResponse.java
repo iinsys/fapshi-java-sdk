@@ -17,5 +17,4 @@ public class TransactionStatusResponse {
     private String currency;
     /** Optional message from the API. */
     private String message;
-    // Add more fields as needed
 } 

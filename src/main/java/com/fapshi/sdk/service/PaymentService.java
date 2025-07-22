@@ -54,7 +54,7 @@ public class PaymentService {
      * @throws FapshiApiException if the API call fails
      */
     public DirectPaymentResponse initiateDirectPayment(DirectPaymentRequest request) {
-        String url = client.getConfig().getBaseUrl() + "/v1/direct-pay";
+        String url = client.getConfig().getBaseUrl() + "/direct-pay";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-API-KEY", client.getConfig().getApiKey());

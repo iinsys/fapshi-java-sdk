@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "schedule": [
+    "after 6am every day"
+  ],
+  "packageRules": [
+    {
+      "managers": ["maven"],
+      "groupName": "all dependencies",
+      "schedule": ["before 7am every day"]
+    }
+  ],
+  "prConcurrentLimit": 5,
+  "assignees": ["bansikah22"],
+  "labels": ["dependencies"]
+}

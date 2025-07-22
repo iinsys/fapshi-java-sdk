@@ -7,6 +7,7 @@ Java SDK for integrating with the [Fapshi Payment API](https://docs.fapshi.com/e
 ![Manual Build and Test](https://github.com/iinsys/fapshi-java-sdk/actions/workflows/maven.yml/badge.svg)
 ![CodeQL](https://github.com/iinsys/fapshi-java-sdk/actions/workflows/codeql-analysis.yml/badge.svg)
 [![Dependabot Status](https://img.shields.io/badge/Dependabot-Enabled-brightgreen?logo=dependabot)](https://github.com/iinsys/fapshi-java-sdk/network/updates)
+[![Snyk Vulnerabilities](https://snyk.io/test/github/iinsys/fapshi-java-sdk/badge.svg)](https://snyk.io/test/github/iinsys/fapshi-java-sdk)
 
 
 ## 🔄 Dependency Management

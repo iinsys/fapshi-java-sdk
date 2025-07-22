@@ -2,6 +2,15 @@
 
 Java SDK for integrating with the [Fapshi Payment API](https://docs.fapshi.com/en/api-reference/getting-started).
 
+## Workflows
+
+![Manual Build and Test](https://github.com/iinsys/fapshi-java-sdk/actions/workflows/maven.yml/badge.svg)
+
+## 🔄 Dependency Management
+
+- 🛠️ **Dependabot**: Automatically checks for dependency updates via [`.github/dependabot.yml`](.github/dependabot.yml)
+- 🤖 **Renovate**: Alternative to Dependabot for custom and bulk PRs (configurable via `renovate.json`)
+
 ## Features
 - Generate payment links
 - Direct mobile money payments (MTN, Orange)

@@ -5,6 +5,8 @@ Java SDK for integrating with the [Fapshi Payment API](https://docs.fapshi.com/e
 ## Workflows
 
 ![Manual Build and Test](https://github.com/iinsys/fapshi-java-sdk/actions/workflows/maven.yml/badge.svg)
+![CodeQL](https://github.com/iinsys/fapshi-java-sdk/actions/workflows/codeql-analysis.yml/badge.svg)
+
 
 ## 🔄 Dependency Management
 

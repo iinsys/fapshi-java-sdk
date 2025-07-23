@@ -32,7 +32,7 @@ public class PaymentService {
      * @throws FapshiApiException if the API call fails
      */
     public PaymentLinkResponse generatePaymentLink(PaymentLinkRequest request) {
-        String url = client.getConfig().getBaseUrl() + "/v1/payment-link";
+        String url = client.getConfig().getBaseUrl() + "/payment-link";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("X-API-KEY", client.getConfig().getApiKey());
@@ -76,7 +76,7 @@ public class PaymentService {
      * @throws FapshiApiException if the API call fails
      */
     public TransactionStatusResponse getTransactionStatus(String transactionId) {
-        String url = client.getConfig().getBaseUrl() + "/v1/transaction-status/" + transactionId;
+        String url = client.getConfig().getBaseUrl() + "/transaction-status/" + transactionId;
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-API-KEY", client.getConfig().getApiKey());
         headers.set("X-API-USER", client.getConfig().getApiUser());

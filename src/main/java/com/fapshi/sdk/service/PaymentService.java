@@ -54,6 +54,13 @@ public class PaymentService {
      * @throws FapshiApiException if the API call fails
      */
     public DirectPaymentResponse initiateDirectPayment(DirectPaymentRequest request) {
+        // Validate required fields
+        if (request.getAmount() <= 0) {
+            throw new IllegalArgumentException("Amount must be greater than 0");
+        }
+        if (request.getPhone() == null || request.getPhone().isEmpty()) {
+            throw new IllegalArgumentException("Phone is required");
+        }
         String url = client.getConfig().getBaseUrl() + "/direct-pay";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

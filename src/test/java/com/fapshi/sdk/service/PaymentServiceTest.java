@@ -56,6 +56,8 @@ public class PaymentServiceTest {
     @Test
     void testInitiateDirectPayment_success() {
         DirectPaymentRequest request = new DirectPaymentRequest();
+        request.setAmount(1000); // required
+        request.setPhone("237670000000"); // required
         DirectPaymentResponse response = new DirectPaymentResponse();
         response.setStatus("SUCCESS");
         response.setTransactionId("txn456");
@@ -72,17 +74,20 @@ public class PaymentServiceTest {
         String txnId = "txn789";
         TransactionStatusResponse response = new TransactionStatusResponse();
         response.setStatus("COMPLETED");
-        response.setTransactionId(txnId);
+        response.setTransId(txnId);
         response.setAmount(1000);
-        response.setCurrency("XAF");
-        response.setMessage("Payment successful");
+        response.setMedium("mobile money");
+        response.setPayerName("John Doe");
+        response.setEmail("john@example.com");
         when(restTemplate.exchange(anyString(), any(), any(), eq(TransactionStatusResponse.class)))
                 .thenReturn(ResponseEntity.ok(response));
         TransactionStatusResponse result = paymentService.getTransactionStatus(txnId);
         assertEquals("COMPLETED", result.getStatus());
-        assertEquals(txnId, result.getTransactionId());
+        assertEquals(txnId, result.getTransId());
         assertEquals(1000, result.getAmount());
-        assertEquals("XAF", result.getCurrency());
+        assertEquals("mobile money", result.getMedium());
+        assertEquals("John Doe", result.getPayerName());
+        assertEquals("john@example.com", result.getEmail());
     }
 
     @Test
@@ -95,14 +100,14 @@ public class PaymentServiceTest {
 
     @Test
     void testWebhookNotificationDeserialization() throws Exception {
-        String json = "{ \"eventType\": \"PAYMENT_COMPLETED\", \"transactionId\": \"txn123\", \"amount\": 1000, \"currency\": \"XAF\", \"status\": \"COMPLETED\", \"message\": \"Payment received\" }";
+        String json = "{ \"transId\": \"txn123\", \"status\": \"COMPLETED\", \"medium\": \"mobile money\", \"amount\": 1000, \"payerName\": \"John Doe\", \"email\": \"john@example.com\" }";
         ObjectMapper mapper = new ObjectMapper();
         WebhookNotification notification = mapper.readValue(json, WebhookNotification.class);
-        assertEquals("PAYMENT_COMPLETED", notification.getEventType());
-        assertEquals("txn123", notification.getTransactionId());
-        assertEquals(1000, notification.getAmount());
-        assertEquals("XAF", notification.getCurrency());
+        assertEquals("txn123", notification.getTransId());
         assertEquals("COMPLETED", notification.getStatus());
-        assertEquals("Payment received", notification.getMessage());
+        assertEquals("mobile money", notification.getMedium());
+        assertEquals(1000, notification.getAmount());
+        assertEquals("John Doe", notification.getPayerName());
+        assertEquals("john@example.com", notification.getEmail());
     }
 } 

@@ -79,19 +79,32 @@ System.out.println("Payment Link: " + response.getLink());
 
 ## Direct Payment Example (MTN/Orange)
 
+### Minimal Example (Required Fields Only)
+
 ```java
 import com.fapshi.sdk.model.DirectPaymentRequest;
 import com.fapshi.sdk.model.DirectPaymentResponse;
 
 DirectPaymentRequest directRequest = new DirectPaymentRequest();
-directRequest.setAmount(2000);
-directRequest.setCurrency("XAF");
-directRequest.setDescription("Order #5678");
-directRequest.setCustomerName("Jane Smith");
-directRequest.setCustomerEmail("jane@example.com");
-directRequest.setCustomerPhone("2376YYYYYYY");
-directRequest.setProvider("MTN"); // or "ORANGE"
-directRequest.setCallbackUrl("https://yourdomain.com/payment-callback");
+directRequest.setAmount(1000); // required
+directRequest.setPhone("237670000000"); // required
+
+DirectPaymentResponse directResponse = paymentService.initiateDirectPayment(directRequest);
+System.out.println("Direct Payment Status: " + directResponse.getStatus());
+```
+
+### Full Example (All Optional Fields)
+
+```java
+DirectPaymentRequest directRequest = new DirectPaymentRequest();
+directRequest.setAmount(2000); // required
+directRequest.setPhone("237690000000"); // required
+directRequest.setName("Jane Smith"); // optional
+directRequest.setEmail("jane@example.com"); // optional
+directRequest.setMedium("mobile money"); // optional
+directRequest.setUserId("user-123"); // optional
+directRequest.setExternalId("order-5678"); // optional
+directRequest.setMessage("Order #5678 payment"); // optional
 
 DirectPaymentResponse directResponse = paymentService.initiateDirectPayment(directRequest);
 System.out.println("Direct Payment Status: " + directResponse.getStatus());
@@ -99,17 +112,44 @@ System.out.println("Direct Payment Status: " + directResponse.getStatus());
 
 ## Check Transaction Status Example
 
+The response will now include all fields as per the Fapshi API documentation:
+
 ```java
 import com.fapshi.sdk.model.TransactionStatusResponse;
 
 String transactionId = "txn_abc123";
 TransactionStatusResponse status = paymentService.getTransactionStatus(transactionId);
 System.out.println("Transaction Status: " + status.getStatus());
+System.out.println("Transaction ID: " + status.getTransId());
+System.out.println("Amount: " + status.getAmount());
+System.out.println("Medium: " + status.getMedium());
+System.out.println("Payer Name: " + status.getPayerName());
+// ... print other fields as needed
 ```
+
+### Transaction Status Response Fields
+
+| Field             | Type    | Description                                  |
+|-------------------|---------|----------------------------------------------|
+| transId           | String  | Transaction ID                               |
+| status            | String  | Payment status (CREATED, PENDING, etc.)      |
+| medium            | String  | Payment medium (mobile money, orange money)  |
+| serviceName       | String  | Name of the service                          |
+| amount            | int     | Payment amount                               |
+| revenue           | int     | Revenue                                      |
+| payerName         | String  | Name of the payer                            |
+| email             | String  | Payer's email                                |
+| redirectUrl       | String  | Redirect URL                                 |
+| externalId        | String  | External order/transaction ID                |
+| userId            | String  | Your system's user ID                        |
+| webhook           | String  | Webhook URL                                  |
+| financialTransId  | String  | Financial transaction ID                     |
+| dateInitiated     | String  | Date initiated                               |
+| dateConfirmed     | String  | Date confirmed                               |
 
 ## Webhook Handling Example
 
-Expose an endpoint in your Spring Boot app:
+The webhook payload will match the transaction status response structure above. Example controller:
 
 ```java
 import org.springframework.web.bind.annotation.*;
@@ -120,8 +160,10 @@ import com.fapshi.sdk.model.WebhookNotification;
 public class FapshiWebhookController {
     @PostMapping("/webhook")
     public void handleWebhook(@RequestBody WebhookNotification notification) {
-        // Process the notification
-        System.out.println("Received webhook: " + notification);
+        // Access all fields from notification, e.g.:
+        System.out.println("Webhook Status: " + notification.getStatus());
+        System.out.println("Webhook Transaction ID: " + notification.getTransId());
+        // ... handle other fields as needed
     }
 }
 ```

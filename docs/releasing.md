@@ -85,10 +85,11 @@ Update the `<version>` in your `pom.xml` accordingly.
 
 ## 5. Summary Table
 
-| Use Case         | Version Example   | How to Use/Publish                |
-|------------------|------------------|-----------------------------------|
-| Development      | 0.2.0-SNAPSHOT   | Not for public use                |
-| Release/Stable   | 1.0.0            | Tag, publish to Maven/JitPack     |
+| Use Case         | Version Example   | How to Use/Publish                                     |
+|------------------|------------------|--------------------------------------------------------|
+| Development      | 0.2.0-SNAPSHOT   | Not for public use                                     |
+| Release/Stable   | 1.0.0            | Tag, publish to Maven/JitPack                          |
+  |Release sub version | 1.1.0        | [Release 1.1.0](./docs/release-notes/release-1-1-0.md) |
 
 ---
 

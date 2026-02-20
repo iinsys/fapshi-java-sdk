@@ -9,7 +9,7 @@
     <description>Java SDK for Fapshi Payment API</description>
     <properties>
         <java.version>21</java.version>
-        <spring.boot.version>4.0.2</spring.boot.version>
+        <spring.boot.version>4.0.3</spring.boot.version>
     </properties>
     <dependencies>
         <!-- Spring Web for RestTemplate/WebClient -->
